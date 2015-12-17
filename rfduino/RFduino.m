@@ -106,6 +106,10 @@ static void incrementUuid16(CBUUID *uuid, unsigned char amount)
     return self;
 }
 
+- (bool)isConnected{
+    return service_uuid != NULL;
+}
+
 - (void)connected
 {
     NSLog(@"rfduino connected");
@@ -163,7 +167,7 @@ static void incrementUuid16(CBUUID *uuid, unsigned char amount)
 
 - (void)peripheral:(CBPeripheral *)aPeripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
-    NSLog(@"didUpdateValueForCharacteristic");
+
     if ([characteristic.UUID isEqual:receive_uuid]) {
         SEL didReceive = @selector(didReceive:);
         if ([delegate respondsToSelector:didReceive]) {

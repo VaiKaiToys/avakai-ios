@@ -173,29 +173,13 @@ static CBUUID *service_uuid;
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
     NSLog(@"didDisconnectPeripheral");
-
-    void (^block)(void) = ^{
-        if ([delegate respondsToSelector:@selector(didDisconnectRFduino:)]) {
-            RFduino *rfduino = [self rfduinoForPeripheral:peripheral];
-            if (rfduino) {
-                [delegate didDisconnectRFduino:rfduino];
-            }
-        }
-    };
-    
-    if (error.code) {
-        cancelBlock = block;
-
-        if ([delegate respondsToSelector:@selector(shouldDisplayAlertTitled:messageBody:)]) {
-            [delegate shouldDisplayAlertTitled:@"Peripheral Disconnected with Error" messageBody:error.description];
-        }
-        
+    RFduino *rfduino = [self rfduinoForPeripheral:peripheral];
+    if (rfduino) {
+        [delegate didDisconnectRFduino:rfduino];
     }
-    else
-        block();
-    
+
     if (peripheral) {
-        [peripheral setDelegate:nil];
+        [peripheral setDelegate: nil];
         peripheral = nil;
     }
 }
@@ -326,8 +310,11 @@ static CBUUID *service_uuid;
 - (void)connectRFduino:(RFduino *)rfduino
 {
     NSLog(@"connectRFduino");
-    
-    [central connectPeripheral:[rfduino peripheral] options:nil];
+    NSDictionary *options = nil;
+    options = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES]
+                                          forKey:CBConnectPeripheralOptionNotifyOnNotificationKey];
+
+    [central connectPeripheral:[rfduino peripheral] options:options];
 }
 
 - (void)disconnectRFduino:(RFduino *)rfduino

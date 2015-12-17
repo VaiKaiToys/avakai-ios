@@ -26,12 +26,16 @@
 
 #import <UIKit/UIKit.h>
 
+//#import "RFduino.h"
+
 #import "RFduinoManagerDelegate.h"
+#import "RFduinoDelegate.h"
+
 
 @class RFduinoManager;
 @class RFduino;
 
-@interface ScanViewController : UITableViewController<RFduinoManagerDelegate, UITableViewDelegate>
+@interface ScanViewController : UITableViewController<RFduinoManagerDelegate, RFduinoDelegate, UITableViewDelegate>
 {
     RFduinoManager *rfduinoManager;
 }

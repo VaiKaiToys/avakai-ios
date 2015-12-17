@@ -25,9 +25,11 @@
 */
 
 #import "AppDelegate.h"
+#import <Parse/Parse.h>
 
 #import "ScanViewController.h"
 #import "RFduinoManager.h"
+#import "RFduino.h"
 
 @interface AppDelegate()
 {
@@ -40,6 +42,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [Parse setApplicationId:@"NFkmPbOSWfkrZqof8E1D2dAnv0lyZb8EnrakcbrT"
+                  clientKey:@"0V9mnHCepkmaXVvRaWnsqkocTKyJGVhdYO22npqY"];
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     rfduinoManager = RFduinoManager.sharedRFduinoManager;
@@ -60,9 +65,6 @@
 {
     NSLog(@"applicationWillResignActive");
     
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-
     wasScanning = false;
     
     if (rfduinoManager.isScanning) {
@@ -71,16 +73,38 @@
     }
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
+- (void)application:(UIApplication *)application
+    didReceiveRemoteNotification:(NSDictionary *)userInfo
+    fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    NSLog(@"Received remote push notification from Parse");
+
+    for(RFduino *rfduino in rfduinoManager.rfduinos)
+    {
+        uint8_t tx[3] = { 10, 3, 99 };
+        NSData *data = [NSData dataWithBytes:(void*)&tx length:3];
+        [rfduino send:data];
+    }
+
+    if (handler) {
+        handler(UIBackgroundFetchResultNewData);
+    }
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    // Store the deviceToken in the current installation and save it to Parse.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    currentInstallation.channels = @[ @"global" ];
+    [currentInstallation saveInBackground];
 }
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [PFPush handlePush:userInfo];
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {}
+- (void)applicationWillEnterForeground:(UIApplication *)application {}
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
@@ -94,9 +118,6 @@
     }
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
+- (void)applicationWillTerminate:(UIApplication *)application {}
 
 @end

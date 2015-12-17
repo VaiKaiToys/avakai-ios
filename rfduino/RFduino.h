@@ -62,6 +62,7 @@ extern NSString *customUUID;
 @property(assign, nonatomic) NSInteger outOfRange;
 - (void)connected;
 - (void)disconnect;
+- (bool)isConnected;
 
 - (void)send:(NSData *)data;
 
