@@ -1,0 +1,48 @@
+# Vaikai Avakai Documentation
+
+This doc explains the prototype implementation of the Avakai messaging feature.
+There a 3 basic components:
+The Avakai iOS App lets you discover and connect to Avakais via Bluetooth.
+Once connected an Avakai will send a Bluetooth message to the iPhone triggered by a head touch.
+This message will be received and forwarded by the app as a Push Notification using the Parse.com backend to
+all other Avakais that are currently connected to the Internet. When a push notification is arriving in the app (using a hidden push notofication with the content-available: 1 property) the app will forward this message again through Bluetooth to the receiving Avakais.
+
+These are the interesting parts in the code:
+
+AppDelegate:
+- (void)application:(UIApplication *)application
+    didReceiveRemoteNotification:(NSDictionary *)pushData
+    fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler
+
+This will be called (even when an app is suspended) when a Push Notification arrives.
+There are 3 types of messages to be handled:
+
+AvakaiMessage: will be forwarded via Bluetooth to the Avakais
+AvakaiConnected & AvakaiDisconnected indicates a new Avakai that connected via (another) iPhone to the internet. They will be listed in the app with a yellow Avakai.
+
+ScanViewController:
+sendPushNotification will send a Push Notification using Parse.
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+When an local Avakai is selected it will either connect to it or if it is already connected it will send a direct “blink” message to the Avakai using Bluetooth
+For Internet-connected Avakais (yellow) a push notification will be send to them.
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+This takes care of the rendering of the Cell for each Avakai.
+
+## Arduino Code
+
+There weren’t many changes I had to do, except for handling messages with the command “99”.
+
+        if (btdata[6]==99){ // Remote Push Notification
+          sound(btdata[5]);
+          RGBchange(btdata[0]);
+          delay(300);
+          RGBchange(0);
+        }
+
+This can be adjusted as required to trigger sounds, vibrations etc.
+
+Parse Backend
+
+Parse provides the Push Notification Infrastructure.
