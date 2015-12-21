@@ -169,9 +169,9 @@ static void incrementUuid16(CBUUID *uuid, unsigned char amount)
 {
 
     if ([characteristic.UUID isEqual:receive_uuid]) {
-        SEL didReceive = @selector(didReceive:);
+        SEL didReceive = @selector(didReceive:avakaiId:);
         if ([delegate respondsToSelector:didReceive]) {
-            [delegate didReceive:characteristic.value];
+            [delegate didReceive:characteristic.value avakaiId:[[NSString alloc] initWithData:advertisementData encoding:NSUTF8StringEncoding]];
         }
     }
 }
@@ -181,7 +181,9 @@ static void incrementUuid16(CBUUID *uuid, unsigned char amount)
 - (void)send:(NSData *)data
 {
     if (! loadedService) {
-        @throw [NSException exceptionWithName:@"sendData" reason:@"please wait for ready callback" userInfo:nil];
+     //   @throw [NSException exceptionWithName:@"sendData" reason:@"please wait for ready callback" userInfo:nil];
+        NSLog(@"Tried to send data when not BT service isn't ready");
+        return;
     }
     
     if ([data length] > max_data) {

@@ -35,6 +35,7 @@
 {
     RFduinoManager *rfduinoManager;
     bool wasScanning;
+    ScanViewController *scanViewController;
 }
 @end
 
@@ -50,7 +51,8 @@
     rfduinoManager = RFduinoManager.sharedRFduinoManager;
     
     ScanViewController *viewController = [[ScanViewController alloc] init];
-    
+    scanViewController = viewController;
+
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [self.window setRootViewController:navController];
     
@@ -74,16 +76,46 @@
 }
 
 - (void)application:(UIApplication *)application
-    didReceiveRemoteNotification:(NSDictionary *)userInfo
+    didReceiveRemoteNotification:(NSDictionary *)pushData
     fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler
 {
     NSLog(@"Received remote push notification from Parse");
 
-    for(RFduino *rfduino in rfduinoManager.rfduinos)
-    {
-        uint8_t tx[3] = { 10, 3, 99 };
-        NSData *data = [NSData dataWithBytes:(void*)&tx length:3];
-        [rfduino send:data];
+    NSString *type = [pushData objectForKey:@"type"];
+    NSString *avakaiId = [pushData objectForKey:@"avakaiId"];
+
+    if([@"AvakaiMessage" isEqualToString: type]){
+        for(RFduino *rfduino in rfduinoManager.rfduinos)
+        {
+            if([avakaiId isEqualToString: @""] || [avakaiId isEqualToString: [[NSString alloc] initWithData:rfduino.advertisementData encoding:NSUTF8StringEncoding]])
+            {
+                uint8_t tx[3] = { 5, 3, 99 };
+                NSData *data = [NSData dataWithBytes:(void*)&tx length:3];
+                [rfduino send:data];
+            }
+        }
+
+        for(UITableViewCell *cell in [[scanViewController tableView] visibleCells])
+        {
+            if([avakaiId isEqualToString: @""] || [avakaiId isEqualToString: cell.textLabel.text])
+            {
+                cell.detailTextLabel.text = @"Received a message.";
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
+                    //cell.detailTextLabel.text = @"via Bluetooth";
+                });
+            }
+        }
+    }else if([@"AvakaiConnected" isEqualToString: type]){
+        // scanViewController push into an array
+        //        viewController.connectedAvakais
+        [scanViewController->remoteAvakais addObject: avakaiId];
+        [[scanViewController tableView] reloadData];
+    }else if([@"AvakaiDisconnected" isEqualToString: type]){
+        [scanViewController->remoteAvakais removeObject: avakaiId];
+        [[scanViewController tableView] reloadData];
+
+    }else{
+        NSLog(@"Unknown Message Type: %@", type);
     }
 
     if (handler) {
@@ -109,9 +141,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     NSLog(@"applicationDidBecomeActive");
-    
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    
     if (wasScanning) {
         [rfduinoManager startScan];
         wasScanning = false;

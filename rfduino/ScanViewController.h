@@ -38,6 +38,8 @@
 @interface ScanViewController : UITableViewController<RFduinoManagerDelegate, RFduinoDelegate, UITableViewDelegate>
 {
     RFduinoManager *rfduinoManager;
+    @public
+    NSMutableArray *remoteAvakais;
 }
 
 @end

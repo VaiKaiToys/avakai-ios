@@ -38,7 +38,9 @@
     bool editingRow;
     bool loadService;
     bool connected;
+    //NSArray *remoteAvakais;
 }
+
 @end
 
 @implementation ScanViewController
@@ -50,6 +52,8 @@
         UINavigationItem *navItem = [self navigationItem];
         [navItem setTitle:@"Avakais"];
         rfduinoManager = [RFduinoManager sharedRFduinoManager];
+        remoteAvakais = [[NSMutableArray alloc] init];
+
     }
     return self;
 }
@@ -100,7 +104,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[rfduinoManager rfduinos] count];
+    return [[rfduinoManager rfduinos] count] + [remoteAvakais count];
 }
 
 
@@ -108,43 +112,59 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"Cell";
-    UITableViewCell *cell;// = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    // if (! cell) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    bool isNewCell = !cell;
+    if (isNewCell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+    }
     cell.textLabel.backgroundColor = [UIColor clearColor];
     cell.detailTextLabel.backgroundColor = [UIColor clearColor];
-    cell.detailTextLabel.text = @"";
     cell.detailTextLabel.numberOfLines = 1;
-    RFduino *rfduino = [[rfduinoManager rfduinos] objectAtIndex:[indexPath row]];
-    if([rfduino delegate] == self){
-        UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"avakai-turk.png"]];
-        cell.accessoryView = iv;
-        cell.detailTextLabel.text = @"via Bluetooth";
-    }else{
-        UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"avakai-grey.png"]];
-        cell.detailTextLabel.text = @"not connected";
 
+    //NSLog(@"Index Path is %i", indexPath.row);
+    long remoteAvakaisIndex = indexPath.row - [[rfduinoManager rfduinos] count];
+    //NSLog(@"Remote Avakai Index %i %i", remoteAvakaisIndex, remoteAvakaisIndex >= 0);
+    if(remoteAvakaisIndex >= 0){
+        cell.textLabel.text = [remoteAvakais objectAtIndex:remoteAvakaisIndex];
+        UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"avakai-yellow.png"]];
         cell.accessoryView = iv;
+        //if(isNewCell){
+            cell.detailTextLabel.text = @"via Internet";
+        //}
+    }else{
+        RFduino *rfduino = [[rfduinoManager rfduinos] objectAtIndex:[indexPath row]];
+        if([rfduino delegate] == self){
+            UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"avakai-turk.png"]];
+            cell.accessoryView = iv;
+            //if(isNewCell){
+                cell.detailTextLabel.text = @"via Bluetooth";
+            //}
+        }else{
+            UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"avakai-grey.png"]];
+            //if(isNewCell){
+                cell.detailTextLabel.text = @"not connected";
+            //}
+            cell.accessoryView = iv;
+        }
+
+        if (rfduino.advertisementData) {
+            cell.textLabel.text  = [[NSString alloc] initWithData:rfduino.advertisementData encoding:NSUTF8StringEncoding];
+        }
     }
 
     UIView* av = [[UIView alloc] init];
     av.frame = CGRectMake(29.5, 35, 5, 5);
     av.layer.cornerRadius = 3.0;
     av.backgroundColor = [UIColor whiteColor];
-
     [cell.accessoryView addSubview:av];
 
-    if (rfduino.advertisementData) {
-        cell.textLabel.text  = [[NSString alloc] initWithData:rfduino.advertisementData encoding:NSUTF8StringEncoding];
-    }
 
     return cell;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    RFduino *rfduino = [rfduinoManager.rfduinos objectAtIndex:[indexPath row]];
-    return (rfduino.outOfRange ? YES : NO);
+    return YES;
 }
 
 - (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
@@ -160,11 +180,6 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [rfduinoManager.rfduinos removeObjectAtIndex:[indexPath row]];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
 }
 
 
@@ -172,34 +187,31 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    RFduino *rfduino = [[rfduinoManager rfduinos] objectAtIndex:[indexPath row]];
-    NSLog(@"pressed cell");
-//    if (! rfduino.outOfRange) {
-    if([rfduino delegate] != self){
-        [rfduinoManager connectRFduino:rfduino];
-    } else {
-        uint8_t tx[3] = {  10, 2,  99 };
-        NSData *data = [NSData dataWithBytes:(void*)&tx length:3];
-        [rfduino send:data];
-        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath: indexPath];
+    long remoteAvakaisIndex = indexPath.row - [[rfduinoManager rfduinos] count];
+
+    if(remoteAvakaisIndex >= 0){
+        [self sendPushNotification: @"AvakaiMessage" alert: @"A message is waiting for your Avakai." avakaiId: [remoteAvakais objectAtIndex:remoteAvakaisIndex]];
+        NSLog(@"Sending Push Notification To Remote Avakai.");
+        cell.detailTextLabel.text = @"Sending push message.";
+
+    }else{
+        RFduino *rfduino = [[rfduinoManager rfduinos] objectAtIndex:[indexPath row]];
+        if([rfduino delegate] != self){
+            cell.detailTextLabel.text = @"Connecting...";
+
+            [rfduinoManager connectRFduino:rfduino];
+        } else {
+            cell.detailTextLabel.text = @"Sending local message.";
+            uint8_t tx[3] = {  10, 2,  99 };
+            NSData *data = [NSData dataWithBytes:(void*)&tx length:3];
+            [rfduino send:data];
+        }
+        //        [self blinkAvakaiAtRow: indexPath.row];
     }
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-#pragma mark - RfduinoDiscoveryDelegate methods
-
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
-
-- (void)shouldDisplayAlertTitled:(NSString *)title messageBody:(NSString *)body
-{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                    message:body
-                                                    delegate:nil
-                                           cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil];
-    [alert show];
-}
-
-#endif
 
 - (void)didDiscoverRFduino:(RFduino *)rfduino
 {
@@ -230,6 +242,8 @@
     //    loadService = true;
     [self.tableView reloadData];
     [rfduino setDelegate:self];
+    //[self sendPushNotification: @"AvakaiConnected" alert: @""];
+    [self sendPushNotification: @"AvakaiConnected" alert: @"" avakaiId:[[NSString alloc] initWithData:rfduino.advertisementData encoding:NSUTF8StringEncoding]];
     NSLog(@"didLoadServiceRFduino");
 }
 
@@ -238,21 +252,57 @@
     [rfduino setDelegate: NULL];
     NSLog(@"didDisconnectRFduino");
     [self.tableView reloadData];
+    [self sendPushNotification: @"AvakaiDisconnected" alert: @"" avakaiId:[[NSString alloc] initWithData:rfduino.advertisementData encoding:NSUTF8StringEncoding]];
 }
 
-- (void)didReceive:(NSData *)data
+- (void)didReceive:(NSData *)data avakaiId: (NSString *) avakaiId
+{
+    // send to all Avakais...
+    [self sendPushNotification: @"AvakaiMessage" alert: @"A message is waiting for your Avakai." avakaiId: @""];
+    NSLog(@"Received Bluetooth data from Avakai %@", avakaiId);
+    for(UITableViewCell *cell in [[self tableView] visibleCells])
+    {
+        if([avakaiId isEqualToString: @""] || [avakaiId isEqualToString: cell.textLabel.text])
+        {
+            cell.detailTextLabel.text = @"Head was touched.";
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
+                //cell.detailTextLabel.text = @"via Bluetooth";
+            });
+        }
+    }
+}
+
+- (void)sendPushNotification:(NSString *) type alert:(NSString *) alert avakaiId:(NSString *) avakaiId
 {
     PFQuery *pushQuery = [PFInstallation query];
     [pushQuery whereKey:@"deviceType" equalTo:@"ios"];
-    NSDictionary *item1 = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"A new message is waiting for your Avakai.", @"0", @"1", @"", nil]
-                                                      forKeys:[NSArray arrayWithObjects:@"alert", @"badge", @"content-available", @"sound",nil]];
+    NSDictionary *item1 = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:alert, @"0", @"1", @"", type, avakaiId, nil]
+                                                      forKeys:[NSArray arrayWithObjects:@"alert", @"badge", @"content-available", @"sound", @"type", @"avakaiId", nil]];
     [PFPush sendPushDataToQueryInBackground:pushQuery withData: item1];
-    NSLog(@"Received Bluetooth data from Avakai");
-    //    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
-    //    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 }
 
-// Override to support rearranging the table view. - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {}
-// Override to support conditional rearranging of the table view. - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{    // Return NO if you do not want the item to be re-orderable.    return YES;}
+- (void) blinkAvakaiAtRow: (NSInteger *)row
+{
+    long remoteAvakaisIndex = row - [[rfduinoManager rfduinos] count];
+    if(remoteAvakaisIndex >= 0){
+    }else{
+    }
 
+}
+
+#pragma mark - RfduinoDiscoveryDelegate methods
+
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+
+- (void)shouldDisplayAlertTitled:(NSString *)title messageBody:(NSString *)body
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:body
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+#endif
 @end

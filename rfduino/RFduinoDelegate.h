@@ -30,6 +30,6 @@
 
 @optional
 
-- (void)didReceive:(NSData *)data;
+- (void)didReceive:(NSData *)data avakaiId: (NSString *) avakaiId;
 
 @end

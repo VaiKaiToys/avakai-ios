@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B12F4091C219DB600A89938 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B12F3FE1C219DB600A89938 /* AppDelegate.m */; };
+		1B12F40B1C219DB600A89938 /* RFduino.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B12F4021C219DB600A89938 /* RFduino.m */; };
+		1B12F40C1C219DB600A89938 /* RfduinoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B12F4051C219DB600A89938 /* RfduinoManager.m */; };
+		1B12F40D1C219DB600A89938 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B12F4081C219DB600A89938 /* ScanViewController.m */; };
 		1B5249FD1C18884300C14721 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B5249FB1C18884300C14721 /* Bolts.framework */; };
 		1B5249FE1C18884300C14721 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B5249FC1C18884300C14721 /* Parse.framework */; };
 		1B524A001C18886900C14721 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B5249FF1C18886900C14721 /* CFNetwork.framework */; };
@@ -18,11 +22,7 @@
 		1B524A0C1C18889500C14721 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B524A0B1C18889500C14721 /* libsqlite3.tbd */; };
 		1B524A101C1897D200C14721 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B524A0F1C1897D200C14721 /* Images-2.xcassets */; };
 		1BAD780F1C18634D00C721FF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BAD780E1C18634D00C721FF /* AudioToolbox.framework */; };
-		AA07EB7D176BF80500AB755D /* CustomCellBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = AA07EB7C176BF80500AB755D /* CustomCellBackground.m */; };
 		AA9B326417B19E7700623C09 /* UIImage+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9B326317B19E7700623C09 /* UIImage+Extras.m */; };
-		AA9B326717B2930C00623C09 /* icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = AA9B326517B2930C00623C09 /* icon-72.png */; };
-		AA9B326817B2930C00623C09 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AA9B326617B2930C00623C09 /* icon.png */; };
-		AA9B326A17B2945300623C09 /* icon-144.png in Resources */ = {isa = PBXBuildFile; fileRef = AA9B326917B2945300623C09 /* icon-144.png */; };
 		AAC4277816C9D86000149784 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC4277716C9D86000149784 /* UIKit.framework */; };
 		AAC4277A16C9D86000149784 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC4277916C9D86000149784 /* Foundation.framework */; };
 		AAC4277C16C9D86000149784 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC4277B16C9D86000149784 /* CoreGraphics.framework */; };
@@ -31,19 +31,24 @@
 		AAC4278A16C9D86000149784 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AAC4278916C9D86000149784 /* Default.png */; };
 		AAC4278C16C9D86000149784 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAC4278B16C9D86000149784 /* Default@2x.png */; };
 		AAC4278E16C9D86000149784 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAC4278D16C9D86000149784 /* Default-568h@2x.png */; };
-		AAC4279F16C9D86C00149784 /* RFduino.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC4279716C9D86C00149784 /* RFduino.m */; };
-		AAC427A016C9D86C00149784 /* RfduinoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC4279A16C9D86C00149784 /* RfduinoManager.m */; };
-		AAC427A116C9D86C00149784 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC4279D16C9D86C00149784 /* ScanViewController.m */; };
 		AAC427AC16C9D8EB00149784 /* AppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC427A716C9D8EB00149784 /* AppViewController.m */; };
 		AAC427AD16C9D8EB00149784 /* AppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAC427A816C9D8EB00149784 /* AppViewController.xib */; };
 		AAC427AF16C9D8EB00149784 /* colorWheel1.png in Resources */ = {isa = PBXBuildFile; fileRef = AAC427AB16C9D8EB00149784 /* colorWheel1.png */; };
 		AAC427B116C9DC3E00149784 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC427B016C9DC3E00149784 /* CoreBluetooth.framework */; };
-		AAC428C316C9FE3600149784 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC428C216C9FE3600149784 /* AppDelegate.m */; };
-		AAE5C88416CDCBA1001005E3 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE5C88316CDCBA1001005E3 /* icon@2x.png */; };
 		AAEE69D316D3F572005A5AEA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAEE69D216D3F572005A5AEA /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B12F3FD1C219DB600A89938 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = rfduino/AppDelegate.h; sourceTree = SOURCE_ROOT; };
+		1B12F3FE1C219DB600A89938 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = rfduino/AppDelegate.m; sourceTree = SOURCE_ROOT; };
+		1B12F4011C219DB600A89938 /* RFduino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RFduino.h; path = rfduino/RFduino.h; sourceTree = SOURCE_ROOT; };
+		1B12F4021C219DB600A89938 /* RFduino.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RFduino.m; path = rfduino/RFduino.m; sourceTree = SOURCE_ROOT; };
+		1B12F4031C219DB600A89938 /* RFduinoDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RFduinoDelegate.h; path = rfduino/RFduinoDelegate.h; sourceTree = SOURCE_ROOT; };
+		1B12F4041C219DB600A89938 /* RfduinoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RfduinoManager.h; path = rfduino/RfduinoManager.h; sourceTree = SOURCE_ROOT; };
+		1B12F4051C219DB600A89938 /* RfduinoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RfduinoManager.m; path = rfduino/RfduinoManager.m; sourceTree = SOURCE_ROOT; };
+		1B12F4061C219DB600A89938 /* RFduinoManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RFduinoManagerDelegate.h; path = rfduino/RFduinoManagerDelegate.h; sourceTree = SOURCE_ROOT; };
+		1B12F4071C219DB600A89938 /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScanViewController.h; path = rfduino/ScanViewController.h; sourceTree = SOURCE_ROOT; };
+		1B12F4081C219DB600A89938 /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScanViewController.m; path = rfduino/ScanViewController.m; sourceTree = SOURCE_ROOT; };
 		1B5249FB1C18884300C14721 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../../../../Desktop/parse-library-1.10.0/Bolts.framework"; sourceTree = "<group>"; };
 		1B5249FC1C18884300C14721 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../../../../Desktop/parse-library-1.10.0/Parse.framework"; sourceTree = "<group>"; };
 		1B5249FF1C18886900C14721 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -55,13 +60,8 @@
 		1B524A0B1C18889500C14721 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		1B524A0F1C1897D200C14721 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		1BAD780E1C18634D00C721FF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		AA07EB7B176BF80500AB755D /* CustomCellBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCellBackground.h; sourceTree = "<group>"; };
-		AA07EB7C176BF80500AB755D /* CustomCellBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCellBackground.m; sourceTree = "<group>"; };
 		AA9B326217B19E7700623C09 /* UIImage+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extras.h"; sourceTree = "<group>"; };
 		AA9B326317B19E7700623C09 /* UIImage+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extras.m"; sourceTree = "<group>"; };
-		AA9B326517B2930C00623C09 /* icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-72.png"; sourceTree = "<group>"; };
-		AA9B326617B2930C00623C09 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		AA9B326917B2945300623C09 /* icon-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-144.png"; sourceTree = "<group>"; };
 		AAC4277316C9D86000149784 /* Avakai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Avakai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAC4277716C9D86000149784 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AAC4277916C9D86000149784 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -73,22 +73,11 @@
 		AAC4278916C9D86000149784 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		AAC4278B16C9D86000149784 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		AAC4278D16C9D86000149784 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		AAC4279616C9D86C00149784 /* RFduino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFduino.h; sourceTree = "<group>"; };
-		AAC4279716C9D86C00149784 /* RFduino.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFduino.m; sourceTree = "<group>"; };
-		AAC4279816C9D86C00149784 /* RFduinoDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFduinoDelegate.h; sourceTree = "<group>"; };
-		AAC4279916C9D86C00149784 /* RfduinoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RfduinoManager.h; sourceTree = "<group>"; };
-		AAC4279A16C9D86C00149784 /* RfduinoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RfduinoManager.m; sourceTree = "<group>"; };
-		AAC4279B16C9D86C00149784 /* RFduinoManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFduinoManagerDelegate.h; sourceTree = "<group>"; };
-		AAC4279C16C9D86C00149784 /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
-		AAC4279D16C9D86C00149784 /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
 		AAC427A616C9D8EB00149784 /* AppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppViewController.h; sourceTree = "<group>"; };
 		AAC427A716C9D8EB00149784 /* AppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppViewController.m; sourceTree = "<group>"; };
 		AAC427A816C9D8EB00149784 /* AppViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppViewController.xib; sourceTree = "<group>"; };
 		AAC427AB16C9D8EB00149784 /* colorWheel1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = colorWheel1.png; sourceTree = "<group>"; };
 		AAC427B016C9DC3E00149784 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		AAC428C116C9FE3600149784 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		AAC428C216C9FE3600149784 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		AAE5C88316CDCBA1001005E3 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		AAEE69D216D3F572005A5AEA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -121,10 +110,6 @@
 		AAC4276816C9D86000149784 = {
 			isa = PBXGroup;
 			children = (
-				AA9B326917B2945300623C09 /* icon-144.png */,
-				AA9B326517B2930C00623C09 /* icon-72.png */,
-				AA9B326617B2930C00623C09 /* icon.png */,
-				AAE5C88316CDCBA1001005E3 /* icon@2x.png */,
 				AAC4279416C9D86C00149784 /* rfduino */,
 				AAC4277D16C9D86000149784 /* Avakai */,
 				AAC4277616C9D86000149784 /* Frameworks */,
@@ -194,18 +179,16 @@
 		AAC4279416C9D86C00149784 /* rfduino */ = {
 			isa = PBXGroup;
 			children = (
-				AAC428C116C9FE3600149784 /* AppDelegate.h */,
-				AAC428C216C9FE3600149784 /* AppDelegate.m */,
-				AAC4279616C9D86C00149784 /* RFduino.h */,
-				AAC4279716C9D86C00149784 /* RFduino.m */,
-				AAC4279816C9D86C00149784 /* RFduinoDelegate.h */,
-				AAC4279916C9D86C00149784 /* RfduinoManager.h */,
-				AAC4279A16C9D86C00149784 /* RfduinoManager.m */,
-				AAC4279B16C9D86C00149784 /* RFduinoManagerDelegate.h */,
-				AAC4279C16C9D86C00149784 /* ScanViewController.h */,
-				AAC4279D16C9D86C00149784 /* ScanViewController.m */,
-				AA07EB7B176BF80500AB755D /* CustomCellBackground.h */,
-				AA07EB7C176BF80500AB755D /* CustomCellBackground.m */,
+				1B12F3FD1C219DB600A89938 /* AppDelegate.h */,
+				1B12F3FE1C219DB600A89938 /* AppDelegate.m */,
+				1B12F4011C219DB600A89938 /* RFduino.h */,
+				1B12F4021C219DB600A89938 /* RFduino.m */,
+				1B12F4031C219DB600A89938 /* RFduinoDelegate.h */,
+				1B12F4041C219DB600A89938 /* RfduinoManager.h */,
+				1B12F4051C219DB600A89938 /* RfduinoManager.m */,
+				1B12F4061C219DB600A89938 /* RFduinoManagerDelegate.h */,
+				1B12F4071C219DB600A89938 /* ScanViewController.h */,
+				1B12F4081C219DB600A89938 /* ScanViewController.m */,
 			);
 			name = rfduino;
 			path = ../rfduino;
@@ -274,10 +257,6 @@
 				AAC427AD16C9D8EB00149784 /* AppViewController.xib in Resources */,
 				AAC427AF16C9D8EB00149784 /* colorWheel1.png in Resources */,
 				1B524A101C1897D200C14721 /* Images-2.xcassets in Resources */,
-				AAE5C88416CDCBA1001005E3 /* icon@2x.png in Resources */,
-				AA9B326717B2930C00623C09 /* icon-72.png in Resources */,
-				AA9B326817B2930C00623C09 /* icon.png in Resources */,
-				AA9B326A17B2945300623C09 /* icon-144.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,12 +268,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAC4278416C9D86000149784 /* main.m in Sources */,
-				AAC4279F16C9D86C00149784 /* RFduino.m in Sources */,
-				AAC427A016C9D86C00149784 /* RfduinoManager.m in Sources */,
-				AAC427A116C9D86C00149784 /* ScanViewController.m in Sources */,
+				1B12F40C1C219DB600A89938 /* RfduinoManager.m in Sources */,
+				1B12F4091C219DB600A89938 /* AppDelegate.m in Sources */,
+				1B12F40D1C219DB600A89938 /* ScanViewController.m in Sources */,
+				1B12F40B1C219DB600A89938 /* RFduino.m in Sources */,
 				AAC427AC16C9D8EB00149784 /* AppViewController.m in Sources */,
-				AAC428C316C9FE3600149784 /* AppDelegate.m in Sources */,
-				AA07EB7D176BF80500AB755D /* CustomCellBackground.m in Sources */,
 				AA9B326417B19E7700623C09 /* UIImage+Extras.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
