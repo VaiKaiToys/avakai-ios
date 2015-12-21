@@ -100,9 +100,6 @@
             if([avakaiId isEqualToString: @""] || [avakaiId isEqualToString: cell.textLabel.text])
             {
                 cell.detailTextLabel.text = @"Received a message.";
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
-                    //cell.detailTextLabel.text = @"via Bluetooth";
-                });
             }
         }
     }else if([@"AvakaiConnected" isEqualToString: type]){

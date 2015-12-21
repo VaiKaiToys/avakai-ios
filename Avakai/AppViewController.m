@@ -28,7 +28,6 @@
 #import <Parse/Parse.h>
 
 #import "AppViewController.h"
-#import "UIImage+Extras.h"
 
 #import <AudioToolbox/AudioServices.h>
 
@@ -75,7 +74,7 @@
 
     if (colorWheel.frame.size.width != colorWheel.image.size.width) {
         UIImage *image1 = [UIImage imageNamed:@"colorWheel1.png"];
-        UIImage *image2 = [image1 imageByScalingProportionallyToSize:colorWheel.frame.size];
+        UIImage *image2 = image1;
         [colorWheel setImage:image2];
     }
 }
@@ -150,8 +149,7 @@
 	UITouch* touch = [touches anyObject];
 	CGPoint point = [touch locationInView:colorWheel];
     if (CGRectContainsPoint(colorWheel.frame, point)) {
-        UIColor *color = [colorWheel.image pixelColorAt:point];
-        [self pickedColor:color];
+        [self pickedColor: [UIColor blueColor]];
     }
 }
 

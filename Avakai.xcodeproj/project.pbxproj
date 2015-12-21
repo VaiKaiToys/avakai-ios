@@ -22,7 +22,6 @@
 		1B524A0C1C18889500C14721 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B524A0B1C18889500C14721 /* libsqlite3.tbd */; };
 		1B524A101C1897D200C14721 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B524A0F1C1897D200C14721 /* Images-2.xcassets */; };
 		1BAD780F1C18634D00C721FF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BAD780E1C18634D00C721FF /* AudioToolbox.framework */; };
-		AA9B326417B19E7700623C09 /* UIImage+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9B326317B19E7700623C09 /* UIImage+Extras.m */; };
 		AAC4277816C9D86000149784 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC4277716C9D86000149784 /* UIKit.framework */; };
 		AAC4277A16C9D86000149784 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC4277916C9D86000149784 /* Foundation.framework */; };
 		AAC4277C16C9D86000149784 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC4277B16C9D86000149784 /* CoreGraphics.framework */; };
@@ -60,8 +59,6 @@
 		1B524A0B1C18889500C14721 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		1B524A0F1C1897D200C14721 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		1BAD780E1C18634D00C721FF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		AA9B326217B19E7700623C09 /* UIImage+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extras.h"; sourceTree = "<group>"; };
-		AA9B326317B19E7700623C09 /* UIImage+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extras.m"; sourceTree = "<group>"; };
 		AAC4277316C9D86000149784 /* Avakai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Avakai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAC4277716C9D86000149784 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AAC4277916C9D86000149784 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -153,8 +150,6 @@
 				AAC427A616C9D8EB00149784 /* AppViewController.h */,
 				AAC427A716C9D8EB00149784 /* AppViewController.m */,
 				AAC427A816C9D8EB00149784 /* AppViewController.xib */,
-				AA9B326217B19E7700623C09 /* UIImage+Extras.h */,
-				AA9B326317B19E7700623C09 /* UIImage+Extras.m */,
 				AAC427AB16C9D8EB00149784 /* colorWheel1.png */,
 				1B524A0F1C1897D200C14721 /* Images-2.xcassets */,
 				AAC4277E16C9D86000149784 /* Supporting Files */,
@@ -273,7 +268,6 @@
 				1B12F40D1C219DB600A89938 /* ScanViewController.m in Sources */,
 				1B12F40B1C219DB600A89938 /* RFduino.m in Sources */,
 				AAC427AC16C9D8EB00149784 /* AppViewController.m in Sources */,
-				AA9B326417B19E7700623C09 /* UIImage+Extras.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
